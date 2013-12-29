@@ -16,8 +16,8 @@ Apache Shiro support for the Jersey JAX-RS implementation.
 
 # Configuring Shiro in a Jersey web application
 
-An example web application is provided complete with [source code](tree/master/src/test/java/org/secnod/example/webapp)
-and [web content](tree/master/src/test/resources/org/secnod/example/webapp).
+An example web application is provided complete with [source code](src/test/java/org/secnod/example/webapp)
+and [web content](src/test/resources/org/secnod/example/webapp).
 
 The rest of this section describes how Shiro has been added to the example application.
 
@@ -187,10 +187,10 @@ specific authorization based on business rules on the user's data.
 More authorization as rules means less authorization as permissions and hence fewer permissions to maintain.
 
 See:
-* The example [User](blob/master/src/test/java/org/secnod/example/webapp/User.java) class.
-* The example [UserInjectableProvider](blob/master/src/test/java/org/secnod/example/webapp/UserInjectableProvider.java)
+* The example [User](src/test/java/org/secnod/example/webapp/User.java) class.
+* The example [UserInjectableProvider](src/test/java/org/secnod/example/webapp/UserInjectableProvider.java)
   which must be added as a singleton.
-  * The class [AuthInjectableProvider](blob/master/src/main/java/org/secnod/shiro/jersey/AuthInjectableProvider.java)
+  * The class [AuthInjectableProvider](src/main/java/org/secnod/shiro/jersey/AuthInjectableProvider.java)
      can be extended for injection of custom classes with the `@Auth` annotation.
 
 # Development

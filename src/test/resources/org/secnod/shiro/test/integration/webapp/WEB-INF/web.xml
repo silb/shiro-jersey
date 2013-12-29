@@ -1,0 +1,45 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+  <servlet>
+    <servlet-name>rest-application</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>javax.ws.rs.Application</param-name>
+      <param-value>org.secnod.shiro.test.integration.webapp.IntegrationTestApplication</param-value>
+    </init-param>
+    <init-param>
+      <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
+      <param-value>org.secnod.shiro.jersey.ShiroResourceFilterFactory</param-value>
+    </init-param>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>rest-application</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>ShiroFilter</filter-name>
+    <filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>
+    <init-param>
+      <param-name>configPath</param-name>
+      <param-value>classpath:org/secnod/shiro/test/integration/webapp/WEB-INF/shiro.ini</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ShiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/404.html</location>
+  </error-page>
+
+</web-app>

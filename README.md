@@ -145,7 +145,7 @@ public class AuthResource {
 ```
 
 Injecting the Subject is just a convenience over calling
-[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject(\)).
+[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject()).
 
 Declarative and programmatic authorization are often combined when some permissions are static and some are dynamic:
 

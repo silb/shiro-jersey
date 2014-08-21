@@ -18,6 +18,7 @@ import com.sun.jersey.spi.container.ResourceFilterFactory;
 
 public class ShiroResourceFilterFactory implements ResourceFilterFactory {
 
+    @SuppressWarnings("unchecked")
     private static List<Class<? extends Annotation>> shiroAnnotations = Collections.unmodifiableList(Arrays.asList(
             RequiresPermissions.class,
             RequiresRoles.class,

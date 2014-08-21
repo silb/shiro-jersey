@@ -145,7 +145,7 @@
           <downloadSources>true</downloadSources>
           <downloadJavaDocs>true</downloadJavaDocs>
           <classpathContainers>
-            <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7</classpathContainer>
+            <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</classpathContainer>
           </classpathContainers>
           <additionalConfig>
             <file>

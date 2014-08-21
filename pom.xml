@@ -6,7 +6,27 @@
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <description>Shiro support for the Jersey JAX-RS implementation.</description>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>Apache Shiro support for the Jersey JAX-RS implementation.</description>
+  <url>https://github.com/silb/shiro-jersey</url>
+
+  <developers>
+    <developer>
+      <name>Stig Inge Lea Bjørnsen</name>
+      <email>stiginge@pvv.org</email>
+      <url>http://blog.silb.no</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git@github.com:silb/shiro-jersey.git</connection>
+    <developerConnection>scm:git@github.com:silb/shiro-jersey.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/silb/shiro-jersey</url>
+  </scm>
+  <issueManagement>
+    <url>https://github.com/silb/shiro-jersey/issues</url>
+  </issueManagement>
 
   <licenses>
     <license>
@@ -99,6 +119,9 @@
         <configuration>
           <source>1.6</source>
           <target>1.6</target>
+          <verbose>true</verbose>
+          <compilerArgument>-Xlint</compilerArgument>
+          <showWarnings>true</showWarnings>
         </configuration>
       </plugin>
 
@@ -172,6 +195,27 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.8</version>
+        <configuration>
+          <links>
+            <link>https://jersey.java.net/apidocs/1.7/jersey/</link>
+            <link>http://shiro.apache.org/static/1.2.2/apidocs/</link>
+          </links>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
        <groupId>org.apache.maven.plugins</groupId>
        <artifactId>maven-jar-plugin</artifactId>
@@ -184,6 +228,15 @@
          </execution>
        </executions>
      </plugin>
+
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.4.2</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
 
     </plugins>
   </build>

@@ -27,7 +27,7 @@ public class ShiroResourceFilterFactory implements ResourceFilterFactory {
 
     @Override
     public List<ResourceFilter> create(AbstractMethod am) {
-        List<ResourceFilter> filters = new ArrayList<>();
+        List<ResourceFilter> filters = new ArrayList<ResourceFilter>();
 
         for (Class<? extends Annotation> annotationClass : shiroAnnotations) {
             // XXX What is the performance of getAnnotation vs getAnnotations?

@@ -1,7 +1,5 @@
 package org.secnod.example.webapp;
 
-import java.util.Objects;
-
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.subject.Subject;
@@ -12,7 +10,9 @@ public class User {
 
     public User(Subject subject) {
         super();
-        this.subject = Objects.requireNonNull(subject);
+        if (subject == null)
+            throw new NullPointerException();
+        this.subject = subject;
     }
 
     public <T> T unwrap(Class<T> type) {

@@ -1,7 +1,5 @@
 package org.secnod.shiro.jersey;
 
-import java.util.Objects;
-
 import org.secnod.shiro.jaxrs.Auth;
 
 import com.sun.jersey.api.model.Parameter;
@@ -16,7 +14,10 @@ public abstract class AuthInjectableProvider<T> implements InjectableProvider<Au
 
     public AuthInjectableProvider(Class<T> type) {
         super();
-        this.type = Objects.requireNonNull(type);
+        if (type == null) {
+            throw new NullPointerException();
+        }
+        this.type = type;
     }
 
     @Override

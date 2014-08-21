@@ -19,7 +19,7 @@ public class IntegrationTestApplication extends ExampleApplication {
     }
 
     public static Set<Object> createAllIntegrationTestResources() {
-        return new HashSet<>(Arrays.asList(
+        return new HashSet<Object>(Arrays.asList(
                 new PublicResource(),
                 new GuestOnlyResource(),
                 new PermissionProtectedResource(),

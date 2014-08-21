@@ -19,7 +19,7 @@ public class ExampleApplication extends Application {
 
     @Override
     public Set<Object> getSingletons() {
-        Set<Object> singletons = new HashSet<>();
+        Set<Object> singletons = new HashSet<Object>();
         singletons.add(new SubjectInjectableProvider());
         singletons.add(new ShiroExceptionMapper());
         singletons.add(new HelloWorldResource());

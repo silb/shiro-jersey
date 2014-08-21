@@ -19,13 +19,18 @@
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
 
+  <context-param>
+    <param-name>shiroConfigLocations</param-name>
+    <param-value>classpath:org/secnod/shiro/test/integration/webapp/WEB-INF/shiro.ini</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+  </listener>
+
   <filter>
     <filter-name>ShiroFilter</filter-name>
     <filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>
-    <init-param>
-      <param-name>configPath</param-name>
-      <param-value>classpath:org/secnod/shiro/test/integration/webapp/WEB-INF/shiro.ini</param-value>
-    </init-param>
   </filter>
 
   <filter-mapping>

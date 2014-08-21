@@ -37,13 +37,19 @@ Add the `ShiroResourceFilterFactory` to the Jersey servlet in `web.xml`:
 Add the Shiro servlet filter in `web.xml`:
 
 ```xml
+
+<context-param>
+  <param-name>shiroConfigLocations</param-name>
+  <param-value>classpath:shiro.ini</param-value>
+</context-param>
+
+<listener>
+    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+</listener>
+
 <filter>
   <filter-name>ShiroFilter</filter-name>
-  <filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>
-  <init-param>
-    <param-name>configPath</param-name>
-    <param-value>classpath:shiro.ini</param-value>
-  </init-param>
+  <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
 </filter>
 
 <filter-mapping>

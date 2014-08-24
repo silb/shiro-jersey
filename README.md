@@ -208,6 +208,7 @@ The integration tests for this project can be run as follows:
     mvn clean package exec:exec
     ```
 
-2. Then test the authorization with
+2. Then test the authorization with:
+
     mvn -Pintegration-tests test
 

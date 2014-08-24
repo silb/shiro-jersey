@@ -29,7 +29,7 @@
 
   <scm>
     <connection>scm:git:https://github.com/silb/shiro-jersey.git</connection>
-    <developerConnection>scm:git:git://github.com/silb/shiro-jersey.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:silb/shiro-jersey.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/silb/shiro-jersey</url>
   </scm>

@@ -201,7 +201,7 @@
         <version>2.8</version>
         <configuration>
           <downloadSources>true</downloadSources>
-          <downloadJavaDocs>true</downloadJavaDocs>
+          <downloadJavadocs>true</downloadJavadocs>
           <classpathContainers>
             <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-${jdk.version}</classpathContainer>
           </classpathContainers>

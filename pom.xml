@@ -28,8 +28,8 @@
   </developers>
 
   <scm>
-    <connection>scm:git:ssh://github.com:silb/shiro-jersey.git</connection>
-    <developerConnection>scm:git:ssh://github.com:silb/shiro-jersey.git</developerConnection>
+    <connection>scm:git:https://github.com/silb/shiro-jersey.git</connection>
+    <developerConnection>scm:git:git://github.com/silb/shiro-jersey.git</developerConnection>
     <tag>HEAD</tag>
     <url>https://github.com/silb/shiro-jersey</url>
   </scm>

@@ -1,16 +1,14 @@
-Apache Shiro support for the Jersey JAX-RS implementation.
+Apache Shiro support for the Jersey 1.x JAX-RS implementation.
 
 # Adding the shiro-jersey dependency
 
-1. Clone this repository.
-2. Run `mvn clean install`
-3. Add the following dependencies to an existing project already using Jersey:
+Add the following dependencies to `pom.xml` in an existing project already using Jersey:
 
 ```xml
 <dependency>
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0</version>
 </dependency>
 ```
 

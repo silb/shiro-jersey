@@ -201,6 +201,10 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <!-- The resources are already in the main JARs. -->
+          <excludeResources>true</excludeResources>
+        </configuration>
       </plugin>
 
       <plugin>

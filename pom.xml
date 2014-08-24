@@ -5,10 +5,19 @@
 
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
+
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Apache Shiro support for the Jersey JAX-RS implementation.</description>
   <url>https://github.com/silb/shiro-jersey</url>
+
+  <licenses>
+    <license>
+      <name>Apache License 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
@@ -24,17 +33,21 @@
     <tag>HEAD</tag>
     <url>https://github.com/silb/shiro-jersey</url>
   </scm>
+
   <issueManagement>
     <url>https://github.com/silb/shiro-jersey/issues</url>
   </issueManagement>
 
-  <licenses>
-    <license>
-      <name>Apache License 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <prerequisites>
     <maven>3.0.4</maven>
@@ -108,17 +121,19 @@
     <jersey.version>1.17.1</jersey.version>
     <jetty.version>8.1.10.v20130312</jetty.version>
     <shiro.version>1.2.2</shiro.version>
+    <jdk.version>1.6</jdk.version>
   </properties>
 
   <build>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>${jdk.version}</source>
+          <target>${jdk.version}</target>
           <verbose>true</verbose>
           <compilerArgument>-Xlint</compilerArgument>
           <showWarnings>true</showWarnings>
@@ -168,17 +183,8 @@
           <downloadSources>true</downloadSources>
           <downloadJavaDocs>true</downloadJavaDocs>
           <classpathContainers>
-            <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</classpathContainer>
+            <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-${jdk.version}</classpathContainer>
           </classpathContainers>
-          <additionalConfig>
-            <file>
-              <name>infinitest.filters</name>
-              <content>
-                <![CDATA[
-                .*\.test\.integration\..*]]>
-              </content>
-            </file>
-           </additionalConfig>
         </configuration>
       </plugin>
 
@@ -190,7 +196,7 @@
           <execution>
             <id>attach-sources</id>
             <goals>
-              <goal>jar</goal>
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
@@ -198,45 +204,27 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.8</version>
-        <configuration>
-          <links>
-            <link>https://jersey.java.net/apidocs/1.7/jersey/</link>
-            <link>http://shiro.apache.org/static/1.2.2/apidocs/</link>
-          </links>
-        </configuration>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.3.1</version>
         <executions>
           <execution>
-            <id>attach-javadocs</id>
             <goals>
-              <goal>jar</goal>
+              <goal>test-jar</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
 
-      <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-jar-plugin</artifactId>
-       <version>2.3.1</version>
-       <executions>
-         <execution>
-           <goals>
-             <goal>test-jar</goal>
-           </goals>
-         </execution>
-       </executions>
-     </plugin>
-
      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>2.4.2</version>
-        <configuration>
-          <tagNameFormat>v@{project.version}</tagNameFormat>
-        </configuration>
-      </plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-release-plugin</artifactId>
+       <version>2.4.2</version>
+       <configuration>
+         <tagNameFormat>v@{project.version}</tagNameFormat>
+         <useReleaseProfile>false</useReleaseProfile>
+         <releaseProfiles>release</releaseProfiles>
+       </configuration>
+     </plugin>
 
     </plugins>
   </build>
@@ -261,6 +249,76 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.8</version>
+            <configuration>
+              <links>
+                <link>https://jersey.java.net/apidocs/1.7/jersey/</link>
+                <link>http://shiro.apache.org/static/1.2.2/apidocs/</link>
+              </links>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <!-- Configure the Eclipse Infinitest plugin to ignore integration tests. -->
+      <id>infinitest</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-eclipse-plugin</artifactId>
+            <version>2.8</version>
+            <configuration>
+              <additionalConfig>
+                <file>
+                  <name>infinitest.filters</name>
+                  <content>
+                  <![CDATA[
+                  .*\.test\.integration\..*]]>
+                  </content>
+                </file>
+              </additionalConfig>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
   </profiles>
 
 </project>

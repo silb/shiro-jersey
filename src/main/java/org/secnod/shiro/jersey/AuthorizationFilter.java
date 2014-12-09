@@ -1,6 +1,14 @@
 package org.secnod.shiro.jersey;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -14,12 +22,7 @@ import org.apache.shiro.authz.aop.GuestAnnotationHandler;
 import org.apache.shiro.authz.aop.PermissionAnnotationHandler;
 import org.apache.shiro.authz.aop.RoleAnnotationHandler;
 import org.apache.shiro.authz.aop.UserAnnotationHandler;
-
-import com.sun.jersey.api.container.MappableContainerException;
-import com.sun.jersey.spi.container.ContainerRequest;
-import com.sun.jersey.spi.container.ContainerRequestFilter;
-import com.sun.jersey.spi.container.ContainerResponseFilter;
-import com.sun.jersey.spi.container.ResourceFilter;
+import org.glassfish.jersey.server.internal.process.MappableException;
 
 /**
  * A filter that grants or denies access to a JAX-RS resource based on the Shiro annotations on it.
@@ -28,47 +31,39 @@ import com.sun.jersey.spi.container.ResourceFilter;
  *
  * @see org.apache.shiro.authz.annotation
  */
-public class ShiroAnnotationResourceFilter<T extends Annotation> implements ResourceFilter, ContainerRequestFilter {
+public class AuthorizationFilter implements ContainerRequestFilter {
 
-    private final T authzSpec;
-    private final AuthorizingAnnotationHandler handler;
+    private final Map<AuthorizingAnnotationHandler, Annotation> authzChecks;
 
-    public ShiroAnnotationResourceFilter(T authzSpec, AuthorizingAnnotationHandler handler) {
-        this.authzSpec = authzSpec;
-        this.handler = handler;
+    public AuthorizationFilter(Collection<Annotation> authzSpecs) {
+        Map<AuthorizingAnnotationHandler, Annotation> authChecks = new HashMap<>(authzSpecs.size());
+        for (Annotation authSpec : authzSpecs) {
+            authChecks.put(createHandler(authSpec), authSpec);
+        }
+        this.authzChecks = Collections.unmodifiableMap(authChecks);
     }
 
-    public static <T extends Annotation> ShiroAnnotationResourceFilter<T> valueOf(T authzSpec) {
-        return new ShiroAnnotationResourceFilter<T>(authzSpec, defaultHandler(authzSpec));
-    }
-
-    private static AuthorizingAnnotationHandler defaultHandler(Annotation annotation) {
+    private static AuthorizingAnnotationHandler createHandler(Annotation annotation) {
         Class<?> t = annotation.annotationType();
         if (RequiresPermissions.class.equals(t)) return new PermissionAnnotationHandler();
         else if (RequiresRoles.class.equals(t)) return new RoleAnnotationHandler();
         else if (RequiresUser.class.equals(t)) return new UserAnnotationHandler();
         else if (RequiresGuest.class.equals(t)) return new GuestAnnotationHandler();
         else if (RequiresAuthentication.class.equals(t)) return new AuthenticatedAnnotationHandler();
-        else throw new IllegalArgumentException("No default handler known for annotation " + t);
+        else throw new IllegalArgumentException("Cannot create a handler for the unknown for annotation " + t);
     }
 
     @Override
-    public ContainerRequestFilter getRequestFilter() {
-        return this;
-    }
-
-    @Override
-    public ContainerResponseFilter getResponseFilter() {
-        return null;
-    }
-
-    @Override
-    public ContainerRequest filter(ContainerRequest request) {
+    public void filter(ContainerRequestContext requestContext) throws IOException {
         try {
-            handler.assertAuthorized(authzSpec);
-            return request;
+            for (Map.Entry<AuthorizingAnnotationHandler, Annotation> authzCheck : authzChecks.entrySet()) {
+                AuthorizingAnnotationHandler handler = authzCheck.getKey();
+                Annotation authzSpec = authzCheck.getValue();
+                handler.assertAuthorized(authzSpec);
+            }
         } catch (AuthorizationException e) {
-            throw new MappableContainerException(e);
+            throw new MappableException(e); // TODO Try without wrapping
         }
     }
+
 }

@@ -1,7 +1,6 @@
 package org.secnod.shiro.test.integration.webapp;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.GzipHandler;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -23,12 +22,8 @@ public class JettyServer {
         webapp.setBaseResource(Resource.newClassPathResource(resourcePath));
         webapp.setParentLoaderPriority(true);
 
-        GzipHandler gzip = new GzipHandler();
-        gzip.setHandler(webapp);
-        gzip.setMinGzipSize(1);
-
-        server.setHandler(gzip);
-        server.setGracefulShutdown(5000);
+        server.setHandler(webapp);
+        server.setStopTimeout(5000);
         server.start();
         server.join();
     }

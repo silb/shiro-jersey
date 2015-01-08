@@ -1,4 +1,7 @@
-Apache Shiro support for the Jersey 1.x JAX-RS implementation.
+Apache Shiro support for the Jersey 2.x JAX-RS implementation.
+
+Jersey 1.x is supported by the 0.1.x releases maintained in the branch
+`release-0.1`.
 
 # Adding the shiro-jersey dependency
 

@@ -208,13 +208,5 @@ instead of `javax.ws.rs.core.Application.getSingletons()`.
 
 The integration tests for this project can be run as follows:
 
-1. Start the Jetty server:
-
-    ```bash
-    mvn clean package exec:exec
-    ```
-
-2. Then test the authorization with:
-
     mvn -Pintegration-tests test
 

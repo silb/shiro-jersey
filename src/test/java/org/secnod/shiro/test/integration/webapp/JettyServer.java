@@ -10,10 +10,10 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class JettyServer {
 
     public static void main(String[] args) throws Exception {
-        jarJetty();
+        start().join();
     }
 
-    static void jarJetty() throws Exception {
+    public static Server start() throws Exception {
         Server server = new Server(8080);
 
         WebAppContext webapp = new WebAppContext();
@@ -25,6 +25,6 @@ public class JettyServer {
         server.setHandler(webapp);
         server.setStopTimeout(5000);
         server.start();
-        server.join();
+        return server;
     }
 }

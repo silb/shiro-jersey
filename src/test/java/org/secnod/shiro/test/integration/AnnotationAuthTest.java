@@ -31,12 +31,14 @@ public class AnnotationAuthTest {
     private static final String USER1_PASSWORD = "user1pw";
     private static final String USER1 = "user1";
 
-    private static String baseUrl = "http://localhost:8080/api/";
+    private String baseUrl;
 
     private static Client client;
 
     @Before
     public void setup() {
+        Integer port = Integer.getInteger("org.secnod.shiro.test.port");
+        baseUrl = "http://localhost:" + port + "/api/";
         logout();
     }
 

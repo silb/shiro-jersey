@@ -17,7 +17,9 @@ public class IntegrationTestSuite {
         Server server;
         @Override
         protected void before() throws Throwable {
-            server = JettyServer.start();
+            int port = JettyServer.allocatePort();
+            System.setProperty("org.secnod.shiro.test.port", Integer.toString(port));
+            server = JettyServer.start(port);
         };
 
         @Override

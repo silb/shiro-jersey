@@ -118,9 +118,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <slf4j.version>1.7.7</slf4j.version>
-    <jersey.version>2.13</jersey.version>
-    <jetty.version>9.2.4.v20141103</jetty.version>
+    <slf4j.version>1.7.10</slf4j.version>
+    <jersey.version>2.15</jersey.version>
+    <jetty.version>9.2.6.v20141205</jetty.version>
     <shiro.version>1.2.3</shiro.version>
     <jdk.version>1.7</jdk.version>
   </properties>

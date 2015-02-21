@@ -15,7 +15,7 @@ Add the following dependencies to `pom.xml` in an existing project already using
 </dependency>
 ```
 
-If you are upgrading from version 0.1.0 which use Jersey 1.x, see the
+If you are upgrading from version 0.1.0 which uses Jersey 1.x, see the
 [upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application

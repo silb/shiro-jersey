@@ -61,13 +61,13 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-server</artifactId>
       <version>${jersey.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-servlet</artifactId>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
       <version>${jersey.version}</version>
     </dependency>
 
@@ -90,8 +90,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.sun.jersey.contribs</groupId>
-      <artifactId>jersey-apache-client</artifactId>
+      <groupId>org.glassfish.jersey.core</groupId>
+      <artifactId>jersey-client</artifactId>
+      <version>${jersey.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.connectors</groupId>
+      <artifactId>jersey-apache-connector</artifactId>
       <version>${jersey.version}</version>
       <scope>test</scope>
     </dependency>
@@ -104,7 +110,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.jaxrs</groupId>
       <artifactId>jackson-jaxrs-json-provider</artifactId>
-      <version>2.1.4</version>
+      <version>2.5.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -112,11 +118,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <slf4j.version>1.7.5</slf4j.version>
-    <jersey.version>1.17.1</jersey.version>
-    <jetty.version>8.1.10.v20130312</jetty.version>
+    <slf4j.version>1.7.10</slf4j.version>
+    <jersey.version>2.16</jersey.version>
+    <jetty.version>9.2.9.v20150224</jetty.version>
     <shiro.version>1.2.3</shiro.version>
-    <jdk.version>1.6</jdk.version>
+    <jdk.version>1.7</jdk.version>
   </properties>
 
   <build>
@@ -148,7 +154,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>[${jdk.version},1.7]</version>
+                  <version>[${jdk.version},1.8]</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
@@ -185,7 +191,6 @@
         <version>2.16</version>
         <configuration>
           <excludes>
-            <exclude>**/*$*</exclude>
             <exclude>**/test/integration/**/*Test.java</exclude>
           </excludes>
         </configuration>
@@ -269,9 +274,9 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.16</version>
             <configuration>
-              <excludes>
-                <exclude>**/*$*</exclude>
-              </excludes>
+              <includes>
+                <include>**/test/integration/IntegrationTestSuite.java</include>
+              </includes>
             </configuration>
           </plugin>
         </plugins>

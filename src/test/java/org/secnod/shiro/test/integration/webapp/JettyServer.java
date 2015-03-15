@@ -1,7 +1,9 @@
 package org.secnod.shiro.test.integration.webapp;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.GzipHandler;
 import org.eclipse.jetty.util.resource.Resource;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -11,11 +13,11 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class JettyServer {
 
     public static void main(String[] args) throws Exception {
-        jarJetty();
+        start(8080).join();
     }
 
-    static void jarJetty() throws Exception {
-        Server server = new Server(8080);
+    public static Server start(int port) throws Exception {
+        Server server = new Server(port);
 
         WebAppContext webapp = new WebAppContext();
         webapp.setContextPath("/");
@@ -23,13 +25,15 @@ public class JettyServer {
         webapp.setBaseResource(Resource.newClassPathResource(resourcePath));
         webapp.setParentLoaderPriority(true);
 
-        GzipHandler gzip = new GzipHandler();
-        gzip.setHandler(webapp);
-        gzip.setMinGzipSize(1);
-
-        server.setHandler(gzip);
-        server.setGracefulShutdown(5000);
+        server.setHandler(webapp);
+        server.setStopTimeout(5000);
         server.start();
-        server.join();
+        return server;
+    }
+
+    public static int allocatePort() throws IOException {
+        try (ServerSocket s = new ServerSocket(0)) {
+            return s.getLocalPort();
+        }
     }
 }

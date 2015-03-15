@@ -1,4 +1,7 @@
-Apache Shiro support for the Jersey 1.x JAX-RS implementation.
+Apache Shiro support for the Jersey 2.x JAX-RS implementation.
+
+Jersey 1.x is supported by the 0.1.x releases maintained in the branch
+`release-0.1`.
 
 # Adding the shiro-jersey dependency
 
@@ -8,9 +11,12 @@ Add the following dependencies to `pom.xml` in an existing project already using
 <dependency>
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0-SNAPSHOT</version>
 </dependency>
 ```
+
+If you are upgrading from version 0.1.0 which uses Jersey 1.x, see the
+[upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application
 
@@ -18,19 +24,6 @@ An example web application is provided complete with [source code](src/test/java
 and [web content](src/test/resources/org/secnod/example/webapp).
 
 The rest of this section describes how Shiro has been added to the example application.
-
-Add the `ShiroResourceFilterFactory` to the Jersey servlet in `web.xml`:
-
-```xml
-<servlet>
-  <servlet-name>rest-application</servlet-name>
-  <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-  <init-param>
-    <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
-    <param-value>org.secnod.shiro.jersey.ShiroResourceFilterFactory</param-value>
-  </init-param>
-</servlet>
-```
 
 Add the Shiro servlet filter in `web.xml`:
 
@@ -60,17 +53,14 @@ Add the Shiro servlet filter in `web.xml`:
 </filter-mapping>
 ```
 
-Then add `SubjectInjectableProvider` and `ShiroExceptionMapper` as singletons in the JAX-RS application:
+Then register the following components in the JAX-RS application:
 
 ```java
-public class ApiApplication extends Application {
-
-    @Override
-    public Set<Object> getSingletons() {
-        Set<Object> singletons = new HashSet<>();
-        singletons.add(new SubjectInjectableProvider());
-        singletons.add(new ShiroExceptionMapper());
-        return singletons;
+public class ApiApplication extends ResourceConfig {
+    public ApiApplication() {
+        register(new AuthorizationFilterFeature());
+        register(new SubjectFactory());
+        register(new AuthInjectionBinder());
     }
 }
 ```
@@ -192,23 +182,31 @@ More authorization as rules means less authorization as permissions and hence fe
 
 See:
 * The example [User](src/test/java/org/secnod/example/webapp/User.java) class.
-* The example [UserInjectableProvider](src/test/java/org/secnod/example/webapp/UserInjectableProvider.java)
-  which must be added as a singleton.
-  * The class [AuthInjectableProvider](src/main/java/org/secnod/shiro/jersey/AuthInjectableProvider.java)
+* The example [UserFactory](src/test/java/org/secnod/example/webapp/UserFactory.java)
+  which must be registered as a JAX-RS component.
+  * The class [TypeFactory](src/main/java/org/secnod/shiro/jersey/TypeFactory.java)
      can be extended for injection of custom classes with the `@Auth` annotation.
+
+## <a name="mig-0.1.x"></a>Migrating from 0.1.x
+
+These instructions assume that the JAX-RS application is a subclass of
+`org.glassfish.jersey.server.ResourceConfig`.
+
+Note that JAX-RS component registration is done by `ResourceConfig.register()`
+instead of `javax.ws.rs.core.Application.getSingletons()`.
+
+* `AuthorizationFilterFeature` replaces `ShiroResourceFilterFactory`
+
+    Remove the configuration of `ShiroResourceFilterFactory` from `web.xml` and
+    register `AuthorizationFilterFeature` as a JAX-RS component.
+
+* `SubjectFactory` replaces `SubjectInjectableProvider`
+* `TypeFactory` replaces `AuthInjectableProvider`
 
 # Development
 ## Running the integration tests
 
 The integration tests for this project can be run as follows:
-
-1. Start the Jetty server:
-
-    ```bash
-    mvn clean package exec:exec
-    ```
-
-2. Then test the authorization with:
 
     mvn -Pintegration-tests test
 

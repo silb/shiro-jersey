@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.secnod.example.webapp.ExampleApplication;
-import org.secnod.example.webapp.UserInjectableProvider;
+import org.secnod.example.webapp.UserFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -16,6 +16,11 @@ public class IntegrationTestApplication extends ExampleApplication {
 
     public IntegrationTestApplication() {
         super();
+        register(new UserFactory());
+        register(new JacksonJsonProvider());
+        for (Object resource : createAllIntegrationTestResources()) {
+            register(resource);
+        }
     }
 
     public static Set<Object> createAllIntegrationTestResources() {
@@ -29,16 +34,7 @@ public class IntegrationTestApplication extends ExampleApplication {
                 new SessionResource(),
                 new SubjectAuthResource(),
                 new UserAuthResource(),
-                new InjectionResource()));
-    }
-
-    @Override
-    public Set<Object> getSingletons() {
-        Set<Object> singletons = super.getSingletons();
-        singletons.addAll(Arrays.asList(
-                new JacksonJsonProvider(),
-                new UserInjectableProvider()));
-        singletons.addAll(createAllIntegrationTestResources());
-        return singletons;
+                new InjectionResource()
+                ));
     }
 }

@@ -4,7 +4,7 @@
 
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Apache Shiro support for the Jersey JAX-RS implementation.</description>
@@ -29,7 +29,7 @@
   <scm>
     <connection>scm:git:https://github.com/silb/shiro-jersey.git</connection>
     <developerConnection>scm:git:git@github.com:silb/shiro-jersey.git</developerConnection>
-    <tag>release-0.2</tag>
+    <tag>v0.2.0</tag>
     <url>https://github.com/silb/shiro-jersey</url>
   </scm>
 

@@ -11,7 +11,7 @@ Add the following dependencies to `pom.xml` in an existing project already using
 <dependency>
   <groupId>org.secnod.shiro</groupId>
   <artifactId>shiro-jersey</artifactId>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 

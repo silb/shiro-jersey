@@ -294,8 +294,8 @@
             <version>2.8</version>
             <configuration>
               <links>
-                <link>https://jersey.java.net/apidocs/1.7/jersey/</link>
-                <link>http://shiro.apache.org/static/1.2.2/apidocs/</link>
+                <link>https://jersey.java.net/apidocs/2.16/jersey/</link>
+                <link>http://shiro.apache.org/static/1.2.3/apidocs/</link>
               </links>
             </configuration>
             <executions>

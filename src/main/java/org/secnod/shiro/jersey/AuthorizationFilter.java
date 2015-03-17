@@ -27,8 +27,6 @@ import org.glassfish.jersey.server.internal.process.MappableException;
 /**
  * A filter that grants or denies access to a JAX-RS resource based on the Shiro annotations on it.
  *
- * @param <T> the type of the Shiro annotation.
- *
  * @see org.apache.shiro.authz.annotation
  */
 public class AuthorizationFilter implements ContainerRequestFilter {

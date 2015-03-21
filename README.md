@@ -1,7 +1,4 @@
-Apache Shiro support for the Jersey 2.x JAX-RS implementation.
-
-Jersey 1.x is supported by the 0.1.x releases maintained in the branch
-`release-0.1`.
+Apache Shiro support for the Jersey JAX-RS implementation.
 
 # Adding the shiro-jersey dependency
 
@@ -15,7 +12,14 @@ Add the following dependencies to `pom.xml` in an existing project already using
 </dependency>
 ```
 
-If you are upgrading from version 0.1.0 which uses Jersey 1.x, see the
+Version compatibility:
+
+|Jersey  |Shiro Jersey|
+|--------|------------|
+|2.x     |0.2.0       |
+|1.x     |0.1.1       |
+
+If you are upgrading from Jersey 1.x, see the
 [upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application

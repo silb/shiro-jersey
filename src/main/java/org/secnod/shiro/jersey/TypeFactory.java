@@ -8,6 +8,7 @@ import org.glassfish.hk2.utilities.Binder;
 import org.glassfish.jersey.internal.inject.Injections;
 import org.glassfish.jersey.server.model.Parameter;
 import org.glassfish.jersey.server.spi.internal.ValueFactoryProvider;
+import org.secnod.shiro.jaxrs.Auth;
 
 /**
  * Base class for factories that can instantiate object of a given type.
@@ -32,7 +33,7 @@ public abstract class TypeFactory<T> implements Factory<T>, ValueFactoryProvider
 
     @Override
     public Factory<?> getValueFactory(Parameter parameter) {
-        if (type.equals(parameter.getRawType())) {
+        if (type.equals(parameter.getRawType()) && parameter.isAnnotationPresent(Auth.class)) {
             return this;
         }
         return null;

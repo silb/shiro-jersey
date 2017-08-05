@@ -16,7 +16,7 @@ Version compatibility:
 
 |Jersey  |Shiro Jersey|
 |--------|------------|
-|2.x     |0.2.0       |
+|2.0-2.5 |0.2.0       |
 |1.x     |0.1.1       |
 
 If you are upgrading from Jersey 1.x, see the

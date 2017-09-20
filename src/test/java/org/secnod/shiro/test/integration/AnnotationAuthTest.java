@@ -2,6 +2,7 @@ package org.secnod.shiro.test.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,8 +12,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
-
-import jersey.repackaged.com.google.common.collect.ImmutableMap;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -73,9 +72,10 @@ public class AnnotationAuthTest {
         client = null;
         CredentialsProvider credentials = new BasicCredentialsProvider();
         credentials.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(username, password));
-        client = newClient(ImmutableMap.of(
-                ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true,
-                ApacheClientProperties.CREDENTIALS_PROVIDER, credentials));
+        Map<String, Object> props = new HashMap<>();
+        props.put(ApacheClientProperties.PREEMPTIVE_BASIC_AUTHENTICATION, true);
+        props.put(ApacheClientProperties.CREDENTIALS_PROVIDER, credentials);
+        client = newClient(props);
     }
 
     private void loginUser() {

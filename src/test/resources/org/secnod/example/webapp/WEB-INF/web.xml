@@ -8,10 +8,6 @@
       <param-name>javax.ws.rs.Application</param-name>
       <param-value>org.secnod.example.webapp.ExampleApplication</param-value>
     </init-param>
-    <init-param>
-      <param-name>com.sun.jersey.spi.container.ResourceFilters</param-name>
-      <param-value>org.secnod.shiro.jersey.ShiroResourceFilterFactory</param-value>
-    </init-param>
   </servlet>
 
   <servlet-mapping>

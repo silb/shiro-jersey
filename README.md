@@ -16,11 +16,14 @@ Version compatibility:
 
 |Jersey  |Shiro Jersey|
 |--------|------------|
+|2.6     |0.3.0-SNAPSHOT|
 |2.0-2.5 |0.2.0       |
 |1.x     |0.1.1       |
 
-If you are upgrading from Jersey 1.x, see the
-[upgrade instructions](#mig-0.1.x).
+If you are upgrading from:
+
+* Jersey 2.5, see the [upgrade instructions](#mig-0.2.x).
+* Jersey 1.x, see the [upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application
 
@@ -64,7 +67,6 @@ public class ApiApplication extends ResourceConfig {
     public ApiApplication() {
         register(new AuthorizationFilterFeature());
         register(new SubjectFactory());
-        register(new AuthInjectionBinder());
     }
 }
 ```
@@ -190,6 +192,11 @@ See:
   which must be registered as a JAX-RS component.
   * The class [TypeFactory](src/main/java/org/secnod/shiro/jersey/TypeFactory.java)
      can be extended for injection of custom classes with the `@Auth` annotation.
+
+## <a name="mig-0.2.x"></a>Migrating from 0.2.x
+
+`AuthInjectionBinder` has been deleted. Remove its registration in
+`ResourceConfig.register()`.
 
 ## <a name="mig-0.1.x"></a>Migrating from 0.1.x
 

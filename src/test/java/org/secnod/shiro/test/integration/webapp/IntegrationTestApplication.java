@@ -29,7 +29,8 @@ public class IntegrationTestApplication extends ExampleApplication {
                 new SessionResource(),
                 new SubjectAuthResource(),
                 new UserAuthResource(),
-                new InjectionResource()));
+                new InjectionResource(),
+                new FieldInjectionResource()));
     }
 
     @Override

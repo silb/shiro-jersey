@@ -165,4 +165,10 @@ public class AnnotationAuthTest {
         loginUser();
         assertGetStatus(200, r);
     }
+
+    @Test
+    public void fieldInjectionFails() {
+        WebResource r = resource("inject/field");
+        assertGetStatus(500, r);
+    }
 }

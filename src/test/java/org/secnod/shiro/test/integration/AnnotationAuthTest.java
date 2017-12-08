@@ -188,4 +188,9 @@ public class AnnotationAuthTest {
         loginUser();
         assertGetStatus(200, webTarget("inject/usersubject"));
     }
+
+    @Test
+    public void fieldInjectionFails() {
+        assertGetStatus(500, webTarget("inject/field"));
+    }
 }

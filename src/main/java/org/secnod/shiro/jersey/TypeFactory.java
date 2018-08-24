@@ -2,7 +2,6 @@ package org.secnod.shiro.jersey;
 
 import java.util.function.Function;
 
-import org.glassfish.hk2.api.Factory;
 import org.glassfish.jersey.server.ContainerRequest;
 import org.glassfish.jersey.server.model.Parameter;
 import org.glassfish.jersey.server.spi.internal.ValueParamProvider;
@@ -13,17 +12,18 @@ import org.secnod.shiro.jaxrs.Auth;
  *
  * @param <T> the type of the objects that the factory creates
  */
-public abstract class TypeFactory<T> implements Factory<T>, ValueParamProvider, Function<ContainerRequest, T> {
+public abstract class TypeFactory<T> implements ValueParamProvider, Function<ContainerRequest, T> {
     public final Class<T> type;
 
     public TypeFactory(Class<T> type) {
         this.type = type;
     }
 
-    // org.glassfish.hk2.api.Factory<T>
-
-    @Override
-    public void dispose(T instance) {}
+    /*
+     * This class used to implement {@code org.glassfish.hk2.api.Factory<T>} providing this method.
+     * This method provides backwards compatibility for existing subclasses.
+     */
+    public abstract T provide();
 
     // org.glassfish.jersey.server.spi.internal.ValueParamProvider
 

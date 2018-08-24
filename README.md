@@ -16,13 +16,13 @@ Version compatibility:
 
 |Jersey  |Shiro Jersey|
 |--------|------------|
-|2.6     |0.3.0-SNAPSHOT|
-|2.0-2.5 |0.2.0       |
+|2.26-   |0.3.0-SNAPSHOT|
+|2.0-2.25|0.2.0       |
 |1.x     |0.1.1       |
 
 If you are upgrading from:
 
-* Jersey 2.5, see the [upgrade instructions](#mig-0.2.x).
+* Jersey 2.0-2.25, see the [upgrade instructions](#mig-0.2.x).
 * Jersey 1.x, see the [upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application

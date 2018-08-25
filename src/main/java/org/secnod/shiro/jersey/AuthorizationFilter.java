@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 
-import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,7 +21,6 @@ import org.apache.shiro.authz.aop.GuestAnnotationHandler;
 import org.apache.shiro.authz.aop.PermissionAnnotationHandler;
 import org.apache.shiro.authz.aop.RoleAnnotationHandler;
 import org.apache.shiro.authz.aop.UserAnnotationHandler;
-import org.glassfish.jersey.server.internal.process.MappableException;
 
 /**
  * A filter that grants or denies access to a JAX-RS resource based on the Shiro annotations on it.
@@ -53,14 +51,10 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        try {
-            for (Map.Entry<AuthorizingAnnotationHandler, Annotation> authzCheck : authzChecks.entrySet()) {
-                AuthorizingAnnotationHandler handler = authzCheck.getKey();
-                Annotation authzSpec = authzCheck.getValue();
-                handler.assertAuthorized(authzSpec);
-            }
-        } catch (AuthorizationException e) {
-            throw new MappableException(e); // TODO Try without wrapping
+        for (Map.Entry<AuthorizingAnnotationHandler, Annotation> authzCheck : authzChecks.entrySet()) {
+            AuthorizingAnnotationHandler handler = authzCheck.getKey();
+            Annotation authzSpec = authzCheck.getValue();
+            handler.assertAuthorized(authzSpec);
         }
     }
 

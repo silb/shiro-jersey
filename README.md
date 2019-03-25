@@ -1,5 +1,14 @@
 Apache Shiro support for the Jersey JAX-RS implementation.
 
+# News
+
+[Shiro 1.4](http://shiro.apache.org/news.html#1.4.0-RC2-released) is in the
+works and includes a new JAX-RS module based on `shiro-jersey`.
+
+* [source code](https://github.com/apache/shiro/tree/shiro-root-1.4.0-RC2/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs)
+* [SHIRO-392](https://issues.apache.org/jira/browse/SHIRO-392)
+* [Example usage of the Shiro JAX-RS module](https://stormpath.com/blog/protecting-jax-rs-resources-rbac-apache-shIro)
+
 # Adding the shiro-jersey dependency
 
 Add the following dependencies to `pom.xml` in an existing project already using Jersey:

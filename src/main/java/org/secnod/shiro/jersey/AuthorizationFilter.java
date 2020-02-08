@@ -26,7 +26,10 @@ import org.apache.shiro.authz.aop.UserAnnotationHandler;
  * A filter that grants or denies access to a JAX-RS resource based on the Shiro annotations on it.
  *
  * @see org.apache.shiro.authz.annotation
+ *
+ * @deprecated replaced by the native Shiro filter {@link org.apache.shiro.web.jaxrs.AnnotationAuthorizationFilter}
  */
+@Deprecated
 public class AuthorizationFilter implements ContainerRequestFilter {
 
     private final Map<AuthorizingAnnotationHandler, Annotation> authzChecks;

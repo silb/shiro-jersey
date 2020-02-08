@@ -18,8 +18,15 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 
 /**
- * Wraps {@link AuthorizationFilter filters} around JAX-RS resources that are annotated with Shiro annotations.
+ * Wraps {@link AuthorizationFilter filters} around JAX-RS resources that are
+ * annotated with Shiro annotations.
+ *
+ * @see org.apache.shiro.web.jaxrs.ShiroFeature
+ *
+ * @deprecated replaced by the native Shiro filter feature
+ *             {@link org.apache.shiro.web.jaxrs.ShiroAnnotationFilterFeature}
  */
+@Deprecated
 public class AuthorizationFilterFeature implements DynamicFeature {
 
     private static List<Class<? extends Annotation>> shiroAnnotations = Collections.unmodifiableList(Arrays.asList(

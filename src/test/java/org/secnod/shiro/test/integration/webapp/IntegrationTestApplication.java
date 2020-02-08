@@ -19,6 +19,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 /**
  * A JAX-RS application for running the integration tests.
  */
+@SuppressWarnings("deprecation")
 public class IntegrationTestApplication extends ResourceConfig {
 
     private static final Logger log = LoggerFactory.getLogger(IntegrationTestApplication.class);

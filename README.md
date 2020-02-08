@@ -65,7 +65,7 @@ Then register the following components in the JAX-RS application:
 ```java
 public class ApiApplication extends ResourceConfig {
     public ApiApplication() {
-        register(new AuthorizationFilterFeature());
+        register(org.apache.shiro.web.jaxrs.ShiroFeature.class);
         register(new SubjectFactory());
     }
 }
@@ -97,7 +97,7 @@ This section describes the different alternatives for how Shiro can be used from
 ## Declarative authorization with annotations
 
 JAX-RS resource classes and methods can be annotated with the
-[standard Shiro annotations](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/authz/annotation/package-summary.html).
+[standard Shiro annotations](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/authz/annotation/package-summary.html).
 
 The authorization requirements can for example be declared with `@RequiresPermissions` on JAX-RS resource classes /
 methods:
@@ -129,7 +129,7 @@ The example above can be summarized as:
 ## Programmatic authorization
 
 Programmatic authorization is done by injecting the Shiro
-[Subject](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/subject/Subject.html) as a method parameter:
+[Subject](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/subject/Subject.html) as a method parameter:
 
 ```java
 @Path("/auth")
@@ -145,7 +145,7 @@ public class AuthResource {
 ```
 
 Injecting the Subject is just a convenience over calling
-[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject()).
+[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject()).
 
 Declarative and programmatic authorization are often combined when some permissions are static and some are dynamic:
 

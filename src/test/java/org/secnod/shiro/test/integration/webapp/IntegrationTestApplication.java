@@ -5,18 +5,35 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.secnod.example.webapp.ExampleApplication;
+import org.apache.shiro.web.jaxrs.ShiroFeature;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.secnod.example.webapp.UserFactory;
+import org.secnod.shiro.jaxrs.ShiroExceptionMapper;
+import org.secnod.shiro.jersey.AuthorizationFilterFeature;
+import org.secnod.shiro.jersey.SubjectFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 /**
  * A JAX-RS application for running the integration tests.
  */
-public class IntegrationTestApplication extends ExampleApplication {
+public class IntegrationTestApplication extends ResourceConfig {
+
+    private static final Logger log = LoggerFactory.getLogger(IntegrationTestApplication.class);
 
     public IntegrationTestApplication() {
         super();
+        if (Boolean.getBoolean("shiro.jersey")) {
+            log.info("Using the shiro-jersey feature.");
+            register(new AuthorizationFilterFeature());
+            register(new ShiroExceptionMapper());
+        } else {
+            log.info("Using the native shiro-jaxrs feature.");
+            register(ShiroFeature.class);
+        }
+        register(new SubjectFactory());
         register(new UserFactory());
         register(new JacksonJsonProvider());
         for (Object resource : createAllIntegrationTestResources()) {

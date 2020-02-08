@@ -219,5 +219,7 @@ instead of `javax.ws.rs.core.Application.getSingletons()`.
 
 The integration tests for this project can be run as follows:
 
-    mvn -Pintegration-tests test
+    mvn -Pintegration-tests test -Dshiro.jersey=false
 
+The default is to run the tests using the Apache Shiro [JAX-RS support](https://repo1.maven.org/maven2/org/apache/shiro/shiro-jaxrs/1.4.2/).
+Alternatively, the old `shiro-jersey` features can be enabled instead by setting `shiro.jersey` to `true`.

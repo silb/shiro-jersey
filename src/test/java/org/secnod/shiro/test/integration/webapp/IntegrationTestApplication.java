@@ -1,6 +1,7 @@
 package org.secnod.shiro.test.integration.webapp;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +22,9 @@ public class IntegrationTestApplication extends ExampleApplication {
         for (Object resource : createAllIntegrationTestResources()) {
             register(resource);
         }
+        for (Class<?> resource : allIntegrationTestResourceClasses()) {
+            register(resource);
+        }
     }
 
     public static Set<Object> createAllIntegrationTestResources() {
@@ -34,8 +38,11 @@ public class IntegrationTestApplication extends ExampleApplication {
                 new SessionResource(),
                 new SubjectAuthResource(),
                 new UserAuthResource(),
-                new InjectionResource(),
-                new FieldInjectionResource()
+                new InjectionResource()
                 ));
+    }
+
+    public static Set<Class<?>> allIntegrationTestResourceClasses() {
+        return Collections.singleton(FieldInjectionResource.class);
     }
 }

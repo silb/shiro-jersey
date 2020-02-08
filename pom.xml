@@ -56,9 +56,19 @@
     </dependency>
     <dependency>
       <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-jaxrs</artifactId>
+      <version>${shiro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-web</artifactId>
       <version>${shiro.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
@@ -125,7 +135,7 @@
     <slf4j.version>1.7.12</slf4j.version>
     <jersey.version>2.26</jersey.version>
     <jetty.version>9.2.13.v20150730</jetty.version>
-    <shiro.version>1.2.6</shiro.version>
+    <shiro.version>1.4.2</shiro.version>
     <jdk.version>1.8</jdk.version>
   </properties>
 

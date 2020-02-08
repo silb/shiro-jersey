@@ -23,9 +23,6 @@ import org.secnod.shiro.jaxrs.Auth;
 @Produces(MediaType.TEXT_PLAIN)
 public class SessionResource {
 
-    @Context
-    HttpServletRequest request;
-
     @POST
     public String login(@FormParam("username") String username, @FormParam("password") String password,
             @FormParam("rememberMe") @DefaultValue("false") boolean rembemberMe) {
@@ -42,7 +39,7 @@ public class SessionResource {
      * Invalidate the session without logging out the Shiro subject. For testing the remember me token.
      */
     @DELETE
-    public String invalidateHttpSession() {
+    public String invalidateHttpSession(@Context HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) throw new WebApplicationException(Status.BAD_REQUEST);
 

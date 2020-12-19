@@ -2,11 +2,15 @@ Apache Shiro support for the Jersey JAX-RS implementation.
 
 # News
 
-[Shiro 1.4](http://shiro.apache.org/news.html#1.4.0-RC2-released) is in the
-works and includes a new JAX-RS module based on `shiro-jersey`.
+[Shiro 1.4](http://shiro.apache.org/news.html#1.4.0-RC2-released) has been
+released and includes a new official JAX-RS module `shiro-jaxrs` based on `shiro-jersey`.
+
+The official `shiro-jaxrs` module offers feature parity with the generic JAX-RS
+functionality of `shiro-jersey`. The main difference is that `shiro-jaxrs` does
+not support the Jersey specific injections of `shiro-jersey`.
 
 See:
-* [the source code](https://github.com/apache/shiro/tree/shiro-root-1.4.0-RC2/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs)
+* [the source code](https://github.com/apache/shiro/tree/shiro-root-1.4.0/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs)
 * [SHIRO-392](https://issues.apache.org/jira/browse/SHIRO-392)
 * [Example usage of the Shiro JAX-RS module](https://stormpath.com/blog/protecting-jax-rs-resources-rbac-apache-shIro)
 
@@ -72,7 +76,7 @@ Then register the following components in the JAX-RS application:
 ```java
 public class ApiApplication extends ResourceConfig {
     public ApiApplication() {
-        register(new AuthorizationFilterFeature());
+        register(org.apache.shiro.web.jaxrs.ShiroFeature.class);
         register(new SubjectFactory());
         register(new AuthInjectionBinder());
     }
@@ -105,7 +109,7 @@ This section describes the different alternatives for how Shiro can be used from
 ## Declarative authorization with annotations
 
 JAX-RS resource classes and methods can be annotated with the
-[standard Shiro annotations](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/authz/annotation/package-summary.html).
+[standard Shiro annotations](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/authz/annotation/package-summary.html).
 
 The authorization requirements can for example be declared with `@RequiresPermissions` on JAX-RS resource classes /
 methods:
@@ -137,7 +141,7 @@ The example above can be summarized as:
 ## Programmatic authorization
 
 Programmatic authorization is done by injecting the Shiro
-[Subject](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/subject/Subject.html) as a method parameter:
+[Subject](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/subject/Subject.html) as a method parameter:
 
 ```java
 @Path("/auth")
@@ -153,7 +157,7 @@ public class AuthResource {
 ```
 
 Injecting the Subject is just a convenience over calling
-[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.2.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject()).
+[SecurityUtils.getSubject()](http://shiro.apache.org/static/1.4.2/apidocs/org/apache/shiro/SecurityUtils.html#getSubject()).
 
 Declarative and programmatic authorization are often combined when some permissions are static and some are dynamic:
 

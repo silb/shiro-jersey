@@ -10,6 +10,7 @@ functionality of `shiro-jersey`. The main difference is that `shiro-jaxrs` does
 not support the Jersey specific injections of `shiro-jersey`.
 
 See:
+* [Apache Shiro JAX-RS Support](https://shiro.apache.org/jaxrs.html)
 * [the source code](https://github.com/apache/shiro/tree/shiro-root-1.4.0/support/jaxrs/src/main/java/org/apache/shiro/web/jaxrs)
 * [SHIRO-392](https://issues.apache.org/jira/browse/SHIRO-392)
 * [Example usage of the Shiro JAX-RS module](https://stormpath.com/blog/protecting-jax-rs-resources-rbac-apache-shIro)

@@ -31,11 +31,14 @@ Version compatibility:
 
 |Jersey  |Shiro Jersey|
 |--------|------------|
+|2.26-   |0.3.0-SNAPSHOT|
 |2.0-2.25|0.2.0       |
 |1.x     |0.1.1       |
 
-If you are upgrading from Jersey 1.x, see the
-[upgrade instructions](#mig-0.1.x).
+If you are upgrading from:
+
+* Jersey 2.0-2.25, see the [upgrade instructions](#mig-0.2.x).
+* Jersey 1.x, see the [upgrade instructions](#mig-0.1.x).
 
 # Configuring Shiro in a Jersey web application
 
@@ -79,7 +82,6 @@ public class ApiApplication extends ResourceConfig {
     public ApiApplication() {
         register(org.apache.shiro.web.jaxrs.ShiroFeature.class);
         register(new SubjectFactory());
-        register(new AuthInjectionBinder());
     }
 }
 ```
@@ -206,6 +208,11 @@ See:
   * The class [TypeFactory](src/main/java/org/secnod/shiro/jersey/TypeFactory.java)
      can be extended for injection of custom classes with the `@Auth` annotation.
 
+## <a name="mig-0.2.x"></a>Migrating from 0.2.x
+
+`AuthInjectionBinder` has been deleted. Remove its registration in
+`ResourceConfig.register()`.
+
 ## <a name="mig-0.1.x"></a>Migrating from 0.1.x
 
 These instructions assume that the JAX-RS application is a subclass of
@@ -227,5 +234,7 @@ instead of `javax.ws.rs.core.Application.getSingletons()`.
 
 The integration tests for this project can be run as follows:
 
-    mvn -Pintegration-tests test
+    mvn -Pintegration-tests test -Dshiro.jersey=false
 
+The default is to run the tests using the Apache Shiro [JAX-RS support](https://repo1.maven.org/maven2/org/apache/shiro/shiro-jaxrs/1.4.2/).
+Alternatively, the old `shiro-jersey` features can be enabled instead by setting `shiro.jersey` to `true`.

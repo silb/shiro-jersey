@@ -58,17 +58,29 @@
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-jaxrs</artifactId>
       <version>${shiro.version}</version>
+      <classifier>jakarta</classifier>
+      <exclusions>
+        <exclusion>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.shiro</groupId>
       <artifactId>shiro-web</artifactId>
       <version>${shiro.version}</version>
+      <classifier>jakarta</classifier>
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>javax.ws.rs</groupId>
-      <artifactId>javax.ws.rs-api</artifactId>
-      <version>2.1</version>
+      <groupId>jakarta.ws.rs</groupId>
+      <artifactId>jakarta.ws.rs-api</artifactId>
+      <version>3.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.core</groupId>
@@ -122,9 +134,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.fasterxml.jackson.jaxrs</groupId>
-      <artifactId>jackson-jaxrs-json-provider</artifactId>
-      <version>2.6.3</version>
+      <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+      <artifactId>jackson-jakarta-rs-json-provider</artifactId>
+      <version>2.15.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -132,11 +144,11 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <slf4j.version>1.7.12</slf4j.version>
-    <jersey.version>2.26</jersey.version>
-    <jetty.version>9.2.13.v20150730</jetty.version>
-    <shiro.version>1.4.2</shiro.version>
-    <jdk.version>1.8</jdk.version>
+    <slf4j.version>2.0.7</slf4j.version>
+    <jersey.version>3.0.10</jersey.version>
+    <jetty.version>11.0.15</jetty.version>
+    <shiro.version>1.12.0</shiro.version>
+    <jdk.version>11</jdk.version>
   </properties>
 
   <build>
@@ -159,6 +171,7 @@
         <configuration>
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
+          <release>${jdk.version}</release>
           <verbose>true</verbose>
           <compilerArgument>-Xlint</compilerArgument>
           <showWarnings>true</showWarnings>
@@ -177,9 +190,9 @@
             </goals>
             <configuration>
               <rules>
-                <requireJavaVersion>
-                  <version>[${jdk.version},1.9]</version>
-                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[3.8.1,)</version>
+                </requireMavenVersion>
               </rules>
             </configuration>
           </execution>

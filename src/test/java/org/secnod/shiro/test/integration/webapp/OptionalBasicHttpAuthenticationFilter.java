@@ -1,7 +1,7 @@
 package org.secnod.shiro.test.integration.webapp;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 

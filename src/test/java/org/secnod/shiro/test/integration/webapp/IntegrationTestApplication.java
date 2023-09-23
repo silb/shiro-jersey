@@ -14,7 +14,7 @@ import org.secnod.shiro.jersey.SubjectFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
 
 /**
  * A JAX-RS application for running the integration tests.

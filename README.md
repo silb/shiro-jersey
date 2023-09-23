@@ -31,6 +31,7 @@ Version compatibility:
 
 |Jersey  |Shiro Jersey|
 |--------|------------|
+|3.x     |(unsupported)|
 |2.26-   |0.3.0-SNAPSHOT|
 |2.0-2.25|0.2.0       |
 |1.x     |0.1.1       |

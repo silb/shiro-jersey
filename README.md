@@ -29,12 +29,12 @@ Add the following dependencies to `pom.xml` in an existing project already using
 
 Version compatibility:
 
-|Jersey  |Shiro Jersey|
-|--------|------------|
-|3.x     |(unsupported)|
-|2.26-   |0.3.0-SNAPSHOT|
-|2.0-2.25|0.2.0       |
-|1.x     |0.1.1       |
+|Jersey  |Shiro Jersey| Compatibility |
+|--------|------------|------|
+|3.x     |0.4.0-SNAPSHOT| Jakarta EE |
+|2.26-   |0.3.0       | Java EE |
+|2.0-2.25|0.2.0       | Java EE |
+|1.x     |0.1.1       | Java EE |
 
 If you are upgrading from:
 
